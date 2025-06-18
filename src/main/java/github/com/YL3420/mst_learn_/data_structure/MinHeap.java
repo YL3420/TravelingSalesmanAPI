@@ -1,7 +1,6 @@
-package github.com.YL3420.mst_learn_.graph;
+package github.com.YL3420.mst_learn_.data_structure;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 

@@ -5,8 +5,8 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>github.com.YL3420</groupId>
-    <artifactId>mst_learn_</artifactId>
-    <name>mst_learn_</name>
+    <artifactId>tsp_approx</artifactId>
+    <name>tsp_approx</name>
     <build>
         <plugins>
             <plugin>
@@ -35,18 +35,6 @@
             <artifactId>junit-jupiter-api</artifactId>
             <version>5.10.0</version>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>guru.nidi</groupId>
-            <artifactId>graphviz-java</artifactId>
-            <version>0.18.1</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.eclipsesource</groupId>
-                    <artifactId>j2v8</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>

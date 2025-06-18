@@ -1,6 +1,6 @@
 package github.com.YL3420.mst_learn_.algorithm;
 
-import github.com.YL3420.mst_learn_.graph.MinHeap;
+import github.com.YL3420.mst_learn_.data_structure.MinHeap;
 import github.com.YL3420.mst_learn_.graph.SpanningTree;
 import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphEdge;
 import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphVertex;
