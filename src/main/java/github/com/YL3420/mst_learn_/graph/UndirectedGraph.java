@@ -86,6 +86,22 @@ public class UndirectedGraph {
             if(v.equals(v1())) return v2();
             return v1();
         }
+
+        /*
+            potential bug, avoid mixing label constructor and loc constructor vertices
+            in edge usage
+        */
+        @Override
+        public boolean equals(Object obj){
+            if(this==obj) return true;
+            if(obj==null || getClass() != obj.getClass()) return false;
+
+            GraphEdge otherEdge = (GraphEdge) obj;
+
+            return ((this.v1().equals(otherEdge.v1()) && this.v2().equals(otherEdge.v2())) ||
+                    (this.v1().equals(otherEdge.v2()) && this.v2().equals(otherEdge.v1())));
+
+        }
     }
 
 

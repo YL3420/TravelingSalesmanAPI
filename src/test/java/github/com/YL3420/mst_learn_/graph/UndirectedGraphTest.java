@@ -82,6 +82,20 @@ abstract class UndirectedGraphTest {
                 assertEquals(vertex1, e.getOther(e.v2()));
             }
         }
+
+        @DisplayName("Ensuring that reversing order of the two endpoints doesn't affect"
+                + "inequality of the edges if they share the same two edges and the same length."
+                + "This property pertains to undirected edges")
+        @Test
+        void testReverseVertices(){
+            GraphVertex v1 = new GraphVertex("A");
+            GraphVertex v2 = new GraphVertex("B");
+
+            GraphEdge e1 = new GraphEdge(v1, v2, 3);
+            GraphEdge e2 = new GraphEdge(v2, v1, 3);
+
+            assertEquals(e1, e2);
+        }
     }
 
     @DisplayName("Testing that neighbors method returns a list of"
