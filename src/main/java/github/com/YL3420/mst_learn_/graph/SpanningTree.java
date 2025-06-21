@@ -36,7 +36,7 @@ public class SpanningTree extends UndirectedGraph {
         assert !vertices.isEmpty();
 
         Queue<GraphVertex> frontier = new LinkedList<>();
-        List<GraphVertex> visited = new ArrayList<>();
+        DeduplicatedLinkedList<GraphVertex> visited = new DeduplicatedLinkedList<>();
 
         GraphVertex root = this.vertices.getFirst();
         frontier.add(root);
