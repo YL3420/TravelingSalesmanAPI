@@ -2,6 +2,7 @@ package github.com.YL3420.mst_learn_.graph;
 
 import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphEdge;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -132,6 +133,38 @@ abstract class UndirectedGraphTest {
         for(GraphVertex n : g.neighbors(vertexOg)){
             assertTrue(allVertices.contains(n));
         }
+    }
+
+    @Test
+    void testAdjacencyMatrix(){
+        GraphVertex A = new GraphVertex("A");
+        GraphVertex B = new GraphVertex("B");
+        GraphVertex C = new GraphVertex("C");
+        GraphVertex D = new GraphVertex("D");
+        GraphVertex E = new GraphVertex("E");
+
+        GraphEdge AB = new GraphEdge(A, B, 1);
+        GraphEdge BC = new GraphEdge(B, C, 1);
+        GraphEdge CD = new GraphEdge(C, D, 1);
+        GraphEdge AC = new GraphEdge(A, C, 1);
+        GraphEdge AD = new GraphEdge(A, D, 1);
+        GraphEdge AE = new GraphEdge(A, E, 1);
+        GraphEdge BD = new GraphEdge(B, D, 1);
+        GraphEdge BE = new GraphEdge(B, E, 1);
+        GraphEdge CE = new GraphEdge(C, E, 1);
+
+        ArrayList<GraphEdge> edges = new ArrayList<>(List.of(AB, BC, CD, AC, AD, AE, BD, BE, CE));
+
+        UndirectedGraph g = new UndirectedGraph(new ArrayList<>(List.of(A, B, C, D, E)),
+                edges);
+
+        for(GraphVertex v : g.graphAdjMatrix.keySet()){
+            for(GraphVertex e : g.graphAdjMatrix.get(v).keySet()){
+                assertTrue(edges.contains(g.graphAdjMatrix.get(v).get(e)));
+                edges.remove(g.graphAdjMatrix.get(v).get(e));
+            }
+        }
+
     }
 }
 
