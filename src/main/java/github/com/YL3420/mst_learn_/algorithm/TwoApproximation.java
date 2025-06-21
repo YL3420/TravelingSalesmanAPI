@@ -4,12 +4,14 @@ import github.com.YL3420.mst_learn_.data_structure.DeduplicatedLinkedList;
 import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphEdge;
 import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphVertex;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class TwoApproximation {
 
     MinimumSpanningTree graph;
     GraphVertex root;
-    DeduplicatedLinkedList<GraphVertex> traverseOrder;
+    LinkedList<GraphVertex> traverseOrder;
 
 
     /*
@@ -47,8 +49,19 @@ public class TwoApproximation {
             maybe we can implement a nearestNeighbor property in vertex, where each time a new neighbor is
             added, we update it accordingly so we don't rely on sorting
          */
+        traverseOrder.add(root);
+        Queue<GraphVertex> frontier = new LinkedList<>();
+        frontier.add(root);
 
-        traverseOrder.addLast(root);
+        while(!frontier.isEmpty()){
+            GraphVertex v = frontier.remove();
+            for(GraphVertex n : graph.solution.graphAdjMatrix.get(v).keySet()){
+                if(!traverseOrder.contains(n)){
+                    traverseOrder.add(n);
+                    frontier.add(n);
+                }
+            }
+        }
     }
 
     public void findTour(){
