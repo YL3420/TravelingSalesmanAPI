@@ -83,6 +83,43 @@ public class MinimumSpanningTreeTest {
     }
 
     @Test
+    void testAdjacencyList(){
+        MinimumSpanningTree mst = new MinimumSpanningTree();
+        GraphVertex v1 = new GraphVertex(1, 1);
+        GraphVertex v2 = new GraphVertex(2, 2);
+        GraphVertex v3 = new GraphVertex(3, 3);
+        GraphEdge e1 = new GraphEdge(v1, v2, 1);
+        GraphEdge e2 = new GraphEdge(v1, v3, 1);
+        GraphEdge e3 = new GraphEdge(v2, v3, 3);
+
+        ArrayList<GraphEdge> edges = new ArrayList<>(List.of(e1, e2, e3));
+        mst.makeGraph(new ArrayList<>(List.of(v1, v2, v3)), edges);
+
+        mst.runPrims(v1);
+
+        int size = 0;
+        for(GraphEdge e : mst.solution.mapToMstAdjList.get(v1)){
+            assertTrue(e.equals(e1) || e.equals(e2));
+            size++;
+        }
+        assertEquals(2, size);
+
+        int size2 = 0;
+        for(GraphEdge e : mst.solution.mapToMstAdjList.get(v2)){
+            assertEquals(e, e1);
+            size2++;
+        }
+        assertEquals(1, size2);
+
+        int size3 = 0;
+        for(GraphEdge e : mst.solution.mapToMstAdjList.get(v3)){
+            assertEquals(e, e2);
+            size3++;
+        }
+        assertEquals(1, size3);
+    }
+
+    @Test
     void testSolveBigGraph(){
         MinimumSpanningTree mst = new MinimumSpanningTree();
 

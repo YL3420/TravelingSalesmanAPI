@@ -1,6 +1,8 @@
 package github.com.YL3420.mst_learn_.graph;
 
+import github.com.YL3420.mst_learn_.data_structure.DeduplicatedLinkedList;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -12,6 +14,7 @@ public class SpanningTree extends UndirectedGraph {
         edges included in MST
      */
     public ArrayList<GraphEdge> visitedEdges;
+    public HashMap<GraphVertex, DeduplicatedLinkedList<GraphEdge>> mapToMstAdjList;
 
     /*
         minimum cost for MST traversal
@@ -21,6 +24,7 @@ public class SpanningTree extends UndirectedGraph {
     public SpanningTree(ArrayList<GraphVertex> vertices, ArrayList<GraphEdge> edges){
         super(vertices, edges);
         visitedEdges = new ArrayList<>();
+        mapToMstAdjList = new HashMap<>();
         mstWeight = totalWeight;
     }
 

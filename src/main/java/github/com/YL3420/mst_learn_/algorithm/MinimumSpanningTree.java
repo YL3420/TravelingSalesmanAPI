@@ -1,10 +1,12 @@
 package github.com.YL3420.mst_learn_.algorithm;
 
+import github.com.YL3420.mst_learn_.data_structure.DeduplicatedLinkedList;
 import github.com.YL3420.mst_learn_.data_structure.MinHeap;
 import github.com.YL3420.mst_learn_.graph.SpanningTree;
 import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphEdge;
 import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphVertex;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -72,6 +74,35 @@ public class MinimumSpanningTree {
 
             solution.mstWeight += chosenEdge.weight();
             solution.visitedEdges.add(chosenEdge);
+
+            /*
+                creating adjacency list for each node in HashMap that only include edges
+                in MST
+             */
+
+            GraphEdge finalChosenEdge = chosenEdge;
+            solution.mapToMstAdjList.computeIfPresent(added,
+                    (k,v) -> {
+                        v.add(finalChosenEdge);
+                        return v;
+                    }
+            );
+
+            solution.mapToMstAdjList.computeIfPresent(chosenEdge.getOther(added),
+                    (k,v) -> {
+                        v.add(finalChosenEdge);
+                        return v;
+                    }
+            );
+
+            solution.mapToMstAdjList.computeIfAbsent(added,
+                    k -> new DeduplicatedLinkedList<>()
+            ).add(chosenEdge);
+
+            solution.mapToMstAdjList.computeIfAbsent(chosenEdge.getOther(added),
+                    k -> new DeduplicatedLinkedList<>()
+            ).add(chosenEdge);
+
 
             /*
                 add all outgoing edges of the newly visited node to the min heap

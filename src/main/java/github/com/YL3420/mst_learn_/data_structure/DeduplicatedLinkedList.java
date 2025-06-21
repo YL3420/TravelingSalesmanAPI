@@ -1,9 +1,10 @@
 package github.com.YL3420.mst_learn_.data_structure;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 
-public class DeduplicatedLinkedList<EntryType> {
+public class DeduplicatedLinkedList<EntryType> implements Iterable<EntryType> {
 
     private LinkedList<EntryType> list;
     private HashSet<EntryType> set;
@@ -76,7 +77,7 @@ public class DeduplicatedLinkedList<EntryType> {
         return list.getLast();
     }
 
-    public Iterable<EntryType> entries(){
-        return list;
+    public Iterator<EntryType> iterator(){
+        return list.iterator();
     }
 }
