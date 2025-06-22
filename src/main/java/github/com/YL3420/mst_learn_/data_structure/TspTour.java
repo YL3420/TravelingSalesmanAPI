@@ -4,8 +4,11 @@ package github.com.YL3420.mst_learn_.data_structure;
 import github.com.YL3420.mst_learn_.graph.SpanningTree;
 import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphEdge;
 import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphVertex;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 public class TspTour {
     private final SpanningTree graph;
@@ -44,5 +47,13 @@ public class TspTour {
         }
 
         return eList;
+    }
+
+    public HashMap<GraphVertex, DeduplicatedLinkedList<GraphEdge>> getVToMstAdjList(){
+        return new HashMap<>(graph.mapToMstAdjList);
+    }
+
+    public HashMap<GraphVertex, HashMap<GraphVertex, GraphEdge>> getAdjMatrix(){
+        return new HashMap<>(graph.graphAdjMatrix);
     }
 }

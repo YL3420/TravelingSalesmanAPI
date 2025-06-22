@@ -14,6 +14,11 @@ public class DeduplicatedLinkedList<EntryType> implements Iterable<EntryType> {
         set = new HashSet<>();
     }
 
+    public DeduplicatedLinkedList(DeduplicatedLinkedList<EntryType> copyList){
+        list = copyList.getList();
+        set = copyList.getSet();
+    }
+
     public boolean add(EntryType entry){
         if(set.add(entry)){
             list.add(entry);
@@ -75,6 +80,14 @@ public class DeduplicatedLinkedList<EntryType> implements Iterable<EntryType> {
 
     public EntryType getLast(){
         return list.getLast();
+    }
+
+    public LinkedList<EntryType> getList(){
+        return new LinkedList<>(this.list);
+    }
+
+    public HashSet<EntryType> getSet(){
+        return new HashSet<>(this.set);
     }
 
     public Iterator<EntryType> iterator(){
