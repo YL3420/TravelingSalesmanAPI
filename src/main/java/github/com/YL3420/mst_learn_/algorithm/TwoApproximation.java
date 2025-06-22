@@ -62,7 +62,8 @@ public class TwoApproximation {
 
         while(!frontier.isEmpty()){
             GraphVertex v = frontier.remove();
-            for(GraphVertex n : graph.solution.graphAdjMatrix.get(v).keySet()){
+            for(GraphEdge e : graph.solution.mapToMstAdjList.get(v)){
+                GraphVertex n = e.getOther(v);
                 if(!visited.contains(n)){
                     visited.add(n);
                     frontier.add(n);

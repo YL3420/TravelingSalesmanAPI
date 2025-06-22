@@ -128,8 +128,8 @@ public class TwoApproximationTest {
 
 
 
-//        for(GraphVertex v : tspTour.getVTraverseOrder()){
-//            System.out.println(v.label);
-//        }
+        for(GraphVertex v : tspTour.getVTraverseOrder()){
+            System.out.println(v.label);
+        }
     }
 }
