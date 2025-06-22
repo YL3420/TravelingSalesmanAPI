@@ -1,5 +1,6 @@
 package github.com.YL3420.mst_learn_.algorithm;
 
+import github.com.YL3420.mst_learn_.graph.SpanningTree;
 import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphEdge;
 import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphVertex;
 import java.util.ArrayList;
@@ -15,9 +16,6 @@ public class MinimumSpanningTreeTest {
             + "the isSpanningTree works as intended")
     @Test
     void testMakeGraph(){
-        MinimumSpanningTree mst = new MinimumSpanningTree();
-
-        assertTrue(mst.solution.vertices.isEmpty());
 
         GraphVertex v1 = new GraphVertex(1, 1);
         GraphVertex v2 = new GraphVertex(2, 2);
@@ -29,16 +27,15 @@ public class MinimumSpanningTreeTest {
         GraphEdge e3 = new GraphEdge(v2, v4, 3);
         GraphEdge e4 = new GraphEdge(v3, v4, 4);
 
-        mst.makeGraph(new ArrayList<GraphVertex>(List.of(v1, v2, v3, v4)),
+        SpanningTree graph = new SpanningTree(new ArrayList<GraphVertex>(List.of(v1, v2, v3, v4)),
                 new ArrayList<GraphEdge>(List.of(e1, e2, e3, e4)));
-
+        MinimumSpanningTree mst = new MinimumSpanningTree(graph);
         assertTrue(mst.solution.isSpanningTree());
     }
 
     @DisplayName("")
     @Test
     void solveTwoVertices(){
-        MinimumSpanningTree mst = new MinimumSpanningTree();
 
         GraphVertex v1 = new GraphVertex(1, 1);
         GraphVertex v2 = new GraphVertex(2, 2);
@@ -46,7 +43,8 @@ public class MinimumSpanningTreeTest {
 
         ArrayList<GraphEdge> edges = new ArrayList<GraphEdge>(List.of(e1));
 
-        mst.makeGraph(new ArrayList<GraphVertex>(List.of(v1, v2)), edges);
+        SpanningTree graph = new SpanningTree(new ArrayList<GraphVertex>(List.of(v1, v2)), edges);
+        MinimumSpanningTree mst = new MinimumSpanningTree(graph);
 
         mst.runPrims(v1);
 
@@ -62,7 +60,6 @@ public class MinimumSpanningTreeTest {
 
     @Test
     void solveThreeVertices(){
-        MinimumSpanningTree mst = new MinimumSpanningTree();
 
         GraphVertex v1 = new GraphVertex(1, 1);
         GraphVertex v2 = new GraphVertex(2, 2);
@@ -72,7 +69,8 @@ public class MinimumSpanningTreeTest {
         GraphEdge e3 = new GraphEdge(v2, v3, 3);
 
         ArrayList<GraphEdge> edges = new ArrayList<GraphEdge>(List.of(e1, e2, e3));
-        mst.makeGraph(new ArrayList<GraphVertex>(List.of(v1, v2, v3)), edges);
+        SpanningTree graph = new SpanningTree(new ArrayList<GraphVertex>(List.of(v1, v2, v3)), edges);
+        MinimumSpanningTree mst = new MinimumSpanningTree(graph);
 
         mst.runPrims(v1);
 
@@ -84,7 +82,6 @@ public class MinimumSpanningTreeTest {
 
     @Test
     void testAdjacencyList(){
-        MinimumSpanningTree mst = new MinimumSpanningTree();
         GraphVertex v1 = new GraphVertex(1, 1);
         GraphVertex v2 = new GraphVertex(2, 2);
         GraphVertex v3 = new GraphVertex(3, 3);
@@ -92,8 +89,9 @@ public class MinimumSpanningTreeTest {
         GraphEdge e2 = new GraphEdge(v1, v3, 1);
         GraphEdge e3 = new GraphEdge(v2, v3, 3);
 
-        ArrayList<GraphEdge> edges = new ArrayList<>(List.of(e1, e2, e3));
-        mst.makeGraph(new ArrayList<>(List.of(v1, v2, v3)), edges);
+        ArrayList<GraphEdge> edges = new ArrayList<GraphEdge>(List.of(e1, e2, e3));
+        SpanningTree graph = new SpanningTree(new ArrayList<GraphVertex>(List.of(v1, v2, v3)), edges);
+        MinimumSpanningTree mst = new MinimumSpanningTree(graph);
 
         mst.runPrims(v1);
 
@@ -121,7 +119,6 @@ public class MinimumSpanningTreeTest {
 
     @Test
     void testSolveBigGraph(){
-        MinimumSpanningTree mst = new MinimumSpanningTree();
 
         GraphVertex A = new GraphVertex("A");
         GraphVertex B = new GraphVertex("B");
@@ -146,7 +143,8 @@ public class MinimumSpanningTreeTest {
         ArrayList<GraphVertex> vertices = new ArrayList<>(List.of(A, B, C, D, E, F, G));
         ArrayList<GraphEdge> edges = new ArrayList<GraphEdge>(List.of(AD, AC, BC,
                 CD, CE, BE, DE, DF, EF, FG, EG));
-        mst.makeGraph(vertices, edges);
+        SpanningTree graph = new SpanningTree(vertices, edges);
+        MinimumSpanningTree mst = new MinimumSpanningTree(graph);
         mst.runPrims(A);
 
         assertEquals(42, mst.solution.mstWeight);
@@ -154,7 +152,6 @@ public class MinimumSpanningTreeTest {
 
     @Test
     void testTwoEdgesWithSameLength(){
-        MinimumSpanningTree mst = new MinimumSpanningTree();
 
         GraphVertex A = new GraphVertex("A");
         GraphVertex B = new GraphVertex("B");
@@ -166,7 +163,8 @@ public class MinimumSpanningTreeTest {
 
         ArrayList<GraphVertex> vertices = new ArrayList<>(List.of(A, B, C));
         ArrayList<GraphEdge> edges = new ArrayList<GraphEdge>(List.of(AB, AC, BC));
-        mst.makeGraph(vertices, edges);
+        SpanningTree graph = new SpanningTree(vertices, edges);
+        MinimumSpanningTree mst = new MinimumSpanningTree(graph);
         mst.runPrims(A);
 
         assertEquals(10, mst.solution.mstWeight);

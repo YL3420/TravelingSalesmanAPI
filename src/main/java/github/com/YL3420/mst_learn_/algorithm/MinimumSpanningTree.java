@@ -15,15 +15,9 @@ public class MinimumSpanningTree {
 
     public SpanningTree solution;
 
-    public MinimumSpanningTree(){
+    public MinimumSpanningTree(SpanningTree graph){
         solution = new SpanningTree(new ArrayList<>(List.of()), new ArrayList<>(List.of()));
-    }
-
-    /*
-        make a new SpanningTree
-     */
-    public void makeGraph(List<GraphVertex> v, List<GraphEdge> e){
-        solution = new SpanningTree(v, e);
+        solution = graph;
         solution.visitedEdges = new ArrayList<>();
     }
 

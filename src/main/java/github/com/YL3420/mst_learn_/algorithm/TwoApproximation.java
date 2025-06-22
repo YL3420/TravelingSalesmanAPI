@@ -2,6 +2,7 @@ package github.com.YL3420.mst_learn_.algorithm;
 
 import github.com.YL3420.mst_learn_.data_structure.DeduplicatedLinkedList;
 import github.com.YL3420.mst_learn_.data_structure.TspTour;
+import github.com.YL3420.mst_learn_.graph.SpanningTree;
 import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphEdge;
 import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphVertex;
 import java.util.ArrayList;
@@ -28,8 +29,7 @@ public class TwoApproximation {
         // check for precondition
 
         this.root = root;
-        graph = new MinimumSpanningTree();
-        graph.makeGraph(vertices, edges);
+        graph = new MinimumSpanningTree(new SpanningTree(vertices, edges));
         tspCost = 0;
 //        tspTour = solveTSP();
     }
