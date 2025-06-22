@@ -62,6 +62,20 @@ public class UndirectedGraph {
         public Iterable<GraphEdge> outGoingEdges(){
             return outGoingEdges;
         }
+
+        @Override
+        public boolean equals(Object obj){
+            if(this==obj) return true;
+            if(obj==null || getClass() != obj.getClass()) return false;
+
+            GraphVertex otherVertex = (GraphVertex) obj;
+
+            if(this.label != null)
+                return (this.label.equals(otherVertex.label));
+            if(this.loc != null)
+                return (this.loc.equals(otherVertex.loc));
+            return false;
+        }
     }
 
 
@@ -74,8 +88,7 @@ public class UndirectedGraph {
             for an edge, the two vertices on either ends can't be the same
          */
         public GraphEdge {
-            if((v1.loc() != null && v2.loc() != null && v1.loc().equals(v2.loc())) ||
-                    v1.label != null && v2.label != null && v1.label.equals(v2.label)) {
+            if(v1.equals(v2)) {
                 throw new IllegalArgumentException("v1 and v2 must be on different coordinates");
             }
         }

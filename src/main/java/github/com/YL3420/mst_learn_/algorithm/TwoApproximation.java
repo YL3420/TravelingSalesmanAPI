@@ -6,6 +6,7 @@ import github.com.YL3420.mst_learn_.graph.SpanningTree;
 import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphEdge;
 import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphVertex;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -91,4 +92,22 @@ public class TwoApproximation {
         return new TspTour(graph.solution, tspCost, traverseOrder);
     }
 
+
+    public static List<GraphEdge> makeRandCompleteGraph(List<GraphVertex> vertices){
+        List<GraphEdge> edges = new ArrayList<>();
+
+        for(GraphVertex v : vertices) {
+            for (GraphVertex v2 : vertices){
+                try {
+                    edges.add(new GraphEdge(v, v2, v.hashCode() + v2.hashCode()));
+                } catch (IllegalArgumentException e) {
+                    continue;
+                }
+            }
+        }
+        return edges;
+    }
+
 }
+
+
