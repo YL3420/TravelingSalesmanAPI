@@ -26,8 +26,8 @@ public class TwoApproximationTest {
         GraphEdge AB = new GraphEdge(A, B, 1);
         GraphEdge AC = new GraphEdge(A, C, 1);
         GraphEdge BC = new GraphEdge(B, C, 2);
-        ArrayList<GraphVertex> vertices = new ArrayList<>(List.of(A, B, C));
-        ArrayList<GraphEdge> edges = new ArrayList<>(List.of(AB, AC, BC));
+        LinkedList<GraphVertex> vertices = new LinkedList<>(List.of(A, B, C));
+        LinkedList<GraphEdge> edges = new LinkedList<>(List.of(AB, AC, BC));
 
         SpanningTree graph = new SpanningTree(vertices, edges);
         TwoApproximation twoApprox = new TwoApproximation(graph, A);
@@ -51,7 +51,7 @@ public class TwoApproximationTest {
         GraphVertex C = new GraphVertex("C");
         GraphVertex D = new GraphVertex("D");
         GraphVertex E = new GraphVertex("E");
-        ArrayList<GraphVertex> vertices = new ArrayList<>(List.of(A, B, C, D, E));
+        LinkedList<GraphVertex> vertices = new LinkedList<>(List.of(A, B, C, D, E));
 
         GraphEdge AB = new GraphEdge(A, B, 2);
         GraphEdge AC = new GraphEdge(A, C, 5);
@@ -78,7 +78,7 @@ public class TwoApproximationTest {
         GraphEdge EC = new GraphEdge(E, C, 4);
         GraphEdge ED = new GraphEdge(E, D, 3);
 
-        ArrayList<GraphEdge> edges = new ArrayList<>(List.of(
+        LinkedList<GraphEdge> edges = new LinkedList<>(List.of(
                 AB, AC, AD, AE,
                 BA, BC, BD, BE,
                 CB, CA, CD, CE,
@@ -117,8 +117,8 @@ public class TwoApproximationTest {
             GraphEdge AB = new GraphEdge(A, B, 1);
             GraphEdge AC = new GraphEdge(A, C, 1);
             GraphEdge BC = new GraphEdge(B, C, 2);
-            ArrayList<GraphVertex> vertices = new ArrayList<>(List.of(A, B, C));
-            ArrayList<GraphEdge> edges = new ArrayList<>(List.of(AB, AC, BC));
+            LinkedList<GraphVertex> vertices = new LinkedList<>(List.of(A, B, C));
+            LinkedList<GraphEdge> edges = new LinkedList<>(List.of(AB, AC, BC));
 
             SpanningTree graph = new SpanningTree(vertices, edges);
             TwoApproximation twoApprox = new TwoApproximation(graph, A);
@@ -140,7 +140,7 @@ public class TwoApproximationTest {
             GraphVertex C = new GraphVertex("C");
             GraphVertex D = new GraphVertex("D");
             GraphVertex E = new GraphVertex("E");
-            ArrayList<GraphVertex> vertices = new ArrayList<>(List.of(A, B, C, D, E));
+            LinkedList<GraphVertex> vertices = new LinkedList<>(List.of(A, B, C, D, E));
 
             GraphEdge AB = new GraphEdge(A, B, 2);
             GraphEdge AC = new GraphEdge(A, C, 5);
@@ -167,7 +167,7 @@ public class TwoApproximationTest {
             GraphEdge EC = new GraphEdge(E, C, 4);
             GraphEdge ED = new GraphEdge(E, D, 3);
 
-            ArrayList<GraphEdge> edges = new ArrayList<>(List.of(
+            LinkedList<GraphEdge> edges = new LinkedList<>(List.of(
                     AB, AC, AD, AE,
                     BA, BC, BD, BE,
                     CB, CA, CD, CE,

@@ -2,6 +2,7 @@ package github.com.YL3420.mst_learn_.graph;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 public class UndirectedGraph {
@@ -24,19 +25,19 @@ public class UndirectedGraph {
             a map with all the out going edges from the edge
             matches coordinate (IPair) to the vertex object
          */
-        public ArrayList<GraphEdge> outGoingEdges;
+        public LinkedList<GraphEdge> outGoingEdges;
 
 
         public GraphVertex(double x, double y){
             label = null;
             loc = new IPair(x, y);
-            outGoingEdges = new ArrayList<>();
+            outGoingEdges = new LinkedList<>();
         }
 
         public GraphVertex(String label){
             this.label = label;
             this.loc = null;
-            outGoingEdges = new ArrayList<>();
+            outGoingEdges = new LinkedList<>();
         }
 
         /*
@@ -120,8 +121,8 @@ public class UndirectedGraph {
     }
 
 
-    public List<GraphVertex> vertices;
-    public List<GraphEdge> edges;
+    public LinkedList<GraphVertex> vertices;
+    public LinkedList<GraphEdge> edges;
     public HashMap<GraphVertex, HashMap<GraphVertex, GraphEdge>> graphAdjMatrix;
 
     public double totalWeight;
@@ -129,7 +130,7 @@ public class UndirectedGraph {
     /*
         creates new graph with initial vertices and edges maybe
      */
-    public UndirectedGraph(List<GraphVertex> vertices, List<GraphEdge> edges){
+    public UndirectedGraph(LinkedList<GraphVertex> vertices, LinkedList<GraphEdge> edges){
         this.vertices = vertices;
         this.edges = edges;
         this.totalWeight = 0;

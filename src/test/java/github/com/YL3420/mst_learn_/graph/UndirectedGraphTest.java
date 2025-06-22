@@ -3,6 +3,7 @@ package github.com.YL3420.mst_learn_.graph;
 import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphEdge;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -55,7 +56,7 @@ abstract class UndirectedGraphTest {
         @DisplayName(".")
         @Test
         void testGetAddOutGoingEdges(){
-            ArrayList<GraphEdge> allEdges = new ArrayList<>();
+            LinkedList<GraphEdge> allEdges = new LinkedList<>();
             GraphVertex vertex1 = new GraphVertex(21.3, 19.2);
             GraphEdge edge1 = new UndirectedGraph.GraphEdge(vertex1,
                     new GraphVertex(3, 1), 2);
@@ -113,8 +114,8 @@ abstract class UndirectedGraphTest {
                 vertex2, 20.9);
         GraphEdge edge3 = new UndirectedGraph.GraphEdge(vertexOg,
                 vertex3, 10.9);
-        ArrayList<GraphVertex> allVertices = new ArrayList<>();
-        ArrayList<GraphEdge> allEdges = new ArrayList<>();
+        LinkedList<GraphVertex> allVertices = new LinkedList<>();
+        LinkedList<GraphEdge> allEdges = new LinkedList<>();
 
 
         allVertices.add(vertex1);
@@ -153,9 +154,9 @@ abstract class UndirectedGraphTest {
         GraphEdge BE = new GraphEdge(B, E, 1);
         GraphEdge CE = new GraphEdge(C, E, 1);
 
-        ArrayList<GraphEdge> edges = new ArrayList<>(List.of(AB, BC, CD, AC, AD, AE, BD, BE, CE));
+        LinkedList<GraphEdge> edges = new LinkedList<>(List.of(AB, BC, CD, AC, AD, AE, BD, BE, CE));
 
-        UndirectedGraph g = new UndirectedGraph(new ArrayList<>(List.of(A, B, C, D, E)),
+        UndirectedGraph g = new UndirectedGraph(new LinkedList<>(List.of(A, B, C, D, E)),
                 edges);
 
         for(GraphVertex v : g.graphAdjMatrix.keySet()){
@@ -177,8 +178,8 @@ class SpanningTreeTest extends UndirectedGraphTest {
     void isSpanningTreeTrue() {
         GraphVertex v1 = new GraphVertex(1, 2);
         GraphVertex v2 = new GraphVertex(3, 2);
-        ArrayList<GraphVertex> vertices = new ArrayList<>(List.of(v1, v2));
-        ArrayList<GraphEdge> edges = new ArrayList<>(List.of(new GraphEdge(v1, v2, 3)));
+        LinkedList<GraphVertex> vertices = new LinkedList<>(List.of(v1, v2));
+        LinkedList<GraphEdge> edges = new LinkedList<>(List.of(new GraphEdge(v1, v2, 3)));
         SpanningTree g1 = new SpanningTree(
                 vertices,
                 edges
@@ -204,8 +205,8 @@ class SpanningTreeTest extends UndirectedGraphTest {
         GraphEdge e4 = new GraphEdge(v3, v5, 5);
 
         SpanningTree st = new SpanningTree(
-                new ArrayList<>(List.of(v1, v2, v3, v4, v5, v6)),
-                new ArrayList<>(List.of(e1, e2, e3, e4))
+                new LinkedList<>(List.of(v1, v2, v3, v4, v5, v6)),
+                new LinkedList<>(List.of(e1, e2, e3, e4))
         );
 
         assertFalse(st.isSpanningTree());

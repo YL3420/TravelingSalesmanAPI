@@ -8,6 +8,7 @@ import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphVertex;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -16,7 +17,7 @@ public class MinimumSpanningTree {
     public SpanningTree solution;
 
     public MinimumSpanningTree(SpanningTree graph){
-        solution = new SpanningTree(new ArrayList<>(List.of()), new ArrayList<>(List.of()));
+        solution = new SpanningTree(new LinkedList<>(List.of()), new LinkedList<>(List.of()));
         solution = graph;
         solution.visitedEdges = new ArrayList<>();
     }

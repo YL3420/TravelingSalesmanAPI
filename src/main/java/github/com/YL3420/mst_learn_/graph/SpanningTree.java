@@ -21,7 +21,7 @@ public class SpanningTree extends UndirectedGraph {
      */
     public double mstWeight;
 
-    public SpanningTree(List<GraphVertex> vertices, List<GraphEdge> edges){
+    public SpanningTree(LinkedList<GraphVertex> vertices, LinkedList<GraphEdge> edges){
         super(vertices, edges);
         visitedEdges = new ArrayList<>();
         mapToMstAdjList = new HashMap<>();

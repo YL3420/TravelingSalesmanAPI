@@ -93,8 +93,8 @@ public class TwoApproximation {
     }
 
 
-    public static List<GraphEdge> makeRandCompleteGraph(List<GraphVertex> vertices){
-        List<GraphEdge> edges = new ArrayList<>();
+    public static LinkedList<GraphEdge> makeRandCompleteGraph(LinkedList<GraphVertex> vertices){
+        LinkedList<GraphEdge> edges = new LinkedList<>();
 
         for(GraphVertex v : vertices) {
             for (GraphVertex v2 : vertices){

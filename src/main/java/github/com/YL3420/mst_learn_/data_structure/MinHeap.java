@@ -3,6 +3,8 @@ package github.com.YL3420.mst_learn_.data_structure;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 public class MinHeap<KeyType> {
 
@@ -21,7 +23,7 @@ public class MinHeap<KeyType> {
         with the following entries. min heap is a binary tree, so each parent
         has at most two children
      */
-    private ArrayList<Entry<KeyType>> heapList;
+    private LinkedList<Entry<KeyType>> heapList;
 
     /*
         maps each node in the min heap to its index in the list rep of minheap
@@ -30,7 +32,7 @@ public class MinHeap<KeyType> {
     private HashMap<KeyType, Integer> keyToIndex;
 
     public MinHeap(){
-        heapList = new ArrayList<>();
+        heapList = new LinkedList<>();
         keyToIndex = new HashMap<>();
     }
 
