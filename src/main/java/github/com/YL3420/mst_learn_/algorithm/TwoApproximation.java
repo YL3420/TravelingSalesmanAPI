@@ -15,7 +15,7 @@ public class TwoApproximation {
     private final GraphVertex root;
     private LinkedList<GraphVertex> traverseOrder;
     private double tspCost;
-    public final TspTour tspTour;
+//    public final TspTour tspTour;
 
 
     /*
@@ -31,7 +31,7 @@ public class TwoApproximation {
         graph = new MinimumSpanningTree();
         graph.makeGraph(vertices, edges);
         tspCost = 0;
-        tspTour = solveTSP();
+//        tspTour = solveTSP();
     }
 
     /*
@@ -39,6 +39,7 @@ public class TwoApproximation {
      */
     private void solveMst(){
         graph.runPrims(root);
+        System.out.println(graph.solution.graphAdjMatrix.size());
     }
 
     /*
