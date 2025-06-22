@@ -42,6 +42,68 @@ public class TwoApproximationTest {
         assertEquals(trueVT, tsp.getVTraverseOrder());
     }
 
+    @Test
+    void testMedTSP(){
+
+        GraphVertex A = new GraphVertex("A");
+        GraphVertex B = new GraphVertex("B");
+        GraphVertex C = new GraphVertex("C");
+        GraphVertex D = new GraphVertex("D");
+        GraphVertex E = new GraphVertex("E");
+        ArrayList<GraphVertex> vertices = new ArrayList<>(List.of(A, B, C, D, E));
+
+        GraphEdge AB = new GraphEdge(A, B, 2);
+        GraphEdge AC = new GraphEdge(A, C, 5);
+        GraphEdge AD = new GraphEdge(A, D, 12);
+        GraphEdge AE = new GraphEdge(A, E, 20);
+
+        GraphEdge BA = new GraphEdge(B, A, 2);
+        GraphEdge BC = new GraphEdge(B, C, 22);
+        GraphEdge BD = new GraphEdge(B, D, 8);
+        GraphEdge BE = new GraphEdge(B, E, 4);
+
+        GraphEdge CA = new GraphEdge(C, A, 5);
+        GraphEdge CB = new GraphEdge(C, B, 22);
+        GraphEdge CD = new GraphEdge(C, D, 10);
+        GraphEdge CE = new GraphEdge(C, E, 4);
+
+        GraphEdge DA = new GraphEdge(D, A, 12);
+        GraphEdge DB = new GraphEdge(D, B, 8);
+        GraphEdge DC = new GraphEdge(D, C, 10);
+        GraphEdge DE = new GraphEdge(D, E, 3);
+
+        GraphEdge EA = new GraphEdge(E, A, 20);
+        GraphEdge EB = new GraphEdge(E, B, 4);
+        GraphEdge EC = new GraphEdge(E, C, 4);
+        GraphEdge ED = new GraphEdge(E, D, 3);
+
+        ArrayList<GraphEdge> edges = new ArrayList<>(List.of(
+                AB, AC, AD, AE,
+                BA, BC, BD, BE,
+                CB, CA, CD, CE,
+                DB, DC, DA, DE,
+                EB, EC, ED, EA
+        ));
+
+        TwoApproximation twoApprox = new TwoApproximation(vertices, edges, A);
+        TspTour tspTour = twoApprox.solveTSP();
+
+        LinkedList<GraphVertex> realTraverseV = new LinkedList<>();
+        realTraverseV.add(A);
+        realTraverseV.add(B);
+        realTraverseV.add(E);
+        realTraverseV.add(D);
+        realTraverseV.add(C);
+        realTraverseV.add(A);
+
+        assertEquals(6, tspTour.getVTraverseOrder().size());
+        assertEquals(realTraverseV, tspTour.getVTraverseOrder());
+
+        for(GraphVertex v : tspTour.getVTraverseOrder()){
+            System.out.println(v.label);
+        }
+    }
+
     @Nested
     class GraphEdgeTraversalTest{
 
@@ -67,69 +129,60 @@ public class TwoApproximationTest {
             assertEquals(3, tsp.getETraverseOrder().size());
             assertEquals(trueET, tsp.getETraverseOrder());
         }
-    }
 
-    @Test
-    void testMedTSP(){
+        @Test
+        void testMedVerticesET(){
+            GraphVertex A = new GraphVertex("A");
+            GraphVertex B = new GraphVertex("B");
+            GraphVertex C = new GraphVertex("C");
+            GraphVertex D = new GraphVertex("D");
+            GraphVertex E = new GraphVertex("E");
+            ArrayList<GraphVertex> vertices = new ArrayList<>(List.of(A, B, C, D, E));
 
-        GraphVertex A = new GraphVertex("A");
-        GraphVertex B = new GraphVertex("B");
-        GraphVertex C = new GraphVertex("C");
-        GraphVertex D = new GraphVertex("D");
-        GraphVertex E = new GraphVertex("E");
-        ArrayList<GraphVertex> vertices = new ArrayList<>(List.of(A, B, C, D, E));
+            GraphEdge AB = new GraphEdge(A, B, 2);
+            GraphEdge AC = new GraphEdge(A, C, 5);
+            GraphEdge AD = new GraphEdge(A, D, 12);
+            GraphEdge AE = new GraphEdge(A, E, 20);
 
-        GraphEdge AB = new GraphEdge(A, B, 2);
-        GraphEdge AC = new GraphEdge(A, C, 5);
-        GraphEdge AD = new GraphEdge(A, D, 12);
-        GraphEdge AE = new GraphEdge(A, E, 20);
+            GraphEdge BA = new GraphEdge(B, A, 2);
+            GraphEdge BC = new GraphEdge(B, C, 22);
+            GraphEdge BD = new GraphEdge(B, D, 8);
+            GraphEdge BE = new GraphEdge(B, E, 4);
 
-        GraphEdge BA = new GraphEdge(B, A, 2);
-        GraphEdge BC = new GraphEdge(B, C, 22);
-        GraphEdge BD = new GraphEdge(B, D, 8);
-        GraphEdge BE = new GraphEdge(B, E, 4);
+            GraphEdge CA = new GraphEdge(C, A, 5);
+            GraphEdge CB = new GraphEdge(C, B, 22);
+            GraphEdge CD = new GraphEdge(C, D, 10);
+            GraphEdge CE = new GraphEdge(C, E, 4);
 
-        GraphEdge CA = new GraphEdge(C, A, 5);
-        GraphEdge CB = new GraphEdge(C, B, 22);
-        GraphEdge CD = new GraphEdge(C, D, 10);
-        GraphEdge CE = new GraphEdge(C, E, 3);
+            GraphEdge DA = new GraphEdge(D, A, 12);
+            GraphEdge DB = new GraphEdge(D, B, 8);
+            GraphEdge DC = new GraphEdge(D, C, 10);
+            GraphEdge DE = new GraphEdge(D, E, 3);
 
-        GraphEdge DA = new GraphEdge(D, A, 12);
-        GraphEdge DB = new GraphEdge(D, B, 8);
-        GraphEdge DC = new GraphEdge(D, C, 10);
-        GraphEdge DE = new GraphEdge(D, E, 3);
+            GraphEdge EA = new GraphEdge(E, A, 20);
+            GraphEdge EB = new GraphEdge(E, B, 4);
+            GraphEdge EC = new GraphEdge(E, C, 4);
+            GraphEdge ED = new GraphEdge(E, D, 3);
 
-        GraphEdge EA = new GraphEdge(E, A, 20);
-        GraphEdge EB = new GraphEdge(E, B, 4);
-        GraphEdge EC = new GraphEdge(E, C, 3);
-        GraphEdge ED = new GraphEdge(E, D, 3);
+            ArrayList<GraphEdge> edges = new ArrayList<>(List.of(
+                    AB, AC, AD, AE,
+                    BA, BC, BD, BE,
+                    CB, CA, CD, CE,
+                    DB, DC, DA, DE,
+                    EB, EC, ED, EA
+            ));
 
-        ArrayList<GraphEdge> edges = new ArrayList<>(List.of(
-                AB, AC, AD, AE,
-                BA, BC, BD, BE,
-                CB, CA, CD, CE,
-                DB, DC, DA, DE,
-                EB, EC, ED, EA
-        ));
+            TwoApproximation twoApprox = new TwoApproximation(vertices, edges, A);
+            TspTour tspTour = twoApprox.solveTSP();
 
-        TwoApproximation twoApprox = new TwoApproximation(vertices, edges, A);
-        TspTour tspTour = twoApprox.solveTSP();
+            LinkedList<GraphEdge> eTraversal = new LinkedList<>();
+            eTraversal.add(AB);
+            eTraversal.add(BE);
+            eTraversal.add(ED);
+            eTraversal.add(DC);
+            eTraversal.add(CA);
 
-        LinkedList<GraphVertex> realTraverseV = new LinkedList<>();
-        realTraverseV.add(A);
-        realTraverseV.add(B);
-        realTraverseV.add(E);
-        realTraverseV.add(D);
-        realTraverseV.add(C);
-        realTraverseV.add(A);
-
-        assertEquals(6, tspTour.getVTraverseOrder().size());
-//        assertEquals(realTraverseV, tspTour.getVTraverseOrder());
-
-
-
-        for(GraphVertex v : tspTour.getVTraverseOrder()){
-            System.out.println(v.label);
+            assertEquals(eTraversal, tspTour.getETraverseOrder());
         }
     }
 }
