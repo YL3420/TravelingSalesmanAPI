@@ -39,7 +39,6 @@ public class TwoApproximation {
      */
     private void solveMst(){
         graph.runPrims(root);
-        System.out.println(graph.solution.graphAdjMatrix.size());
     }
 
     /*

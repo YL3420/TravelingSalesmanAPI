@@ -38,7 +38,9 @@ public class TspTour {
 
         GraphVertex prev = vIter.next();
         while(vIter.hasNext()){
-            eList.add(graph.graphAdjMatrix.get(prev).get(vIter.next()));
+            GraphVertex currV = vIter.next();
+            eList.add(graph.graphAdjMatrix.get(prev).get(currV));
+            prev = currV;
         }
 
         return eList;
