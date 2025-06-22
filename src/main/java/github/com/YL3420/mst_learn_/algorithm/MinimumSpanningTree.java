@@ -22,7 +22,7 @@ public class MinimumSpanningTree {
     /*
         make a new SpanningTree
      */
-    public void makeGraph(ArrayList<GraphVertex> v, ArrayList<GraphEdge> e){
+    public void makeGraph(List<GraphVertex> v, List<GraphEdge> e){
         solution = new SpanningTree(v, e);
         solution.visitedEdges = new ArrayList<>();
     }

@@ -24,7 +24,7 @@ public class TwoApproximation {
      */
 
 
-    public TwoApproximation(ArrayList<GraphVertex> vertices, ArrayList<GraphEdge> edges, GraphVertex root){
+    public TwoApproximation(List<GraphVertex> vertices, List<GraphEdge> edges, GraphVertex root){
         // check for precondition
 
         this.root = root;

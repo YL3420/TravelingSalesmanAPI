@@ -13,7 +13,7 @@ public class SpanningTree extends UndirectedGraph {
     /*
         edges included in MST
      */
-    public ArrayList<GraphEdge> visitedEdges;
+    public List<GraphEdge> visitedEdges;
     public HashMap<GraphVertex, DeduplicatedLinkedList<GraphEdge>> mapToMstAdjList;
 
     /*
@@ -21,7 +21,7 @@ public class SpanningTree extends UndirectedGraph {
      */
     public double mstWeight;
 
-    public SpanningTree(ArrayList<GraphVertex> vertices, ArrayList<GraphEdge> edges){
+    public SpanningTree(List<GraphVertex> vertices, List<GraphEdge> edges){
         super(vertices, edges);
         visitedEdges = new ArrayList<>();
         mapToMstAdjList = new HashMap<>();

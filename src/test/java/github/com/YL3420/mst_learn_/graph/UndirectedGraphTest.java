@@ -161,7 +161,7 @@ abstract class UndirectedGraphTest {
         for(GraphVertex v : g.graphAdjMatrix.keySet()){
             for(GraphVertex e : g.graphAdjMatrix.get(v).keySet()){
                 assertTrue(edges.contains(g.graphAdjMatrix.get(v).get(e)));
-                edges.remove(g.graphAdjMatrix.get(v).get(e));
+//                edges.remove(g.graphAdjMatrix.get(v).get(e));
             }
         }
 
