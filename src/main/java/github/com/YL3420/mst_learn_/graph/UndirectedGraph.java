@@ -128,6 +128,9 @@ public class UndirectedGraph {
 
             graphAdjMatrix.computeIfAbsent(e.v1(), k -> new HashMap<>())
                     .put(e.v2(), e);
+
+            graphAdjMatrix.computeIfAbsent(e.v2(), k -> new HashMap<>())
+                    .put(e.v1(), e);
         }
     }
 
