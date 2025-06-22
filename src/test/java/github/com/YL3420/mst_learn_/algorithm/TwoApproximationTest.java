@@ -29,7 +29,8 @@ public class TwoApproximationTest {
         ArrayList<GraphVertex> vertices = new ArrayList<>(List.of(A, B, C));
         ArrayList<GraphEdge> edges = new ArrayList<>(List.of(AB, AC, BC));
 
-        TwoApproximation twoApprox = new TwoApproximation(vertices, edges, A);
+        SpanningTree graph = new SpanningTree(vertices, edges);
+        TwoApproximation twoApprox = new TwoApproximation(graph, A);
         TspTour tsp = twoApprox.solveTSP();
 
         LinkedList<GraphVertex> trueVT = new LinkedList<>();
@@ -85,7 +86,8 @@ public class TwoApproximationTest {
                 EB, EC, ED, EA
         ));
 
-        TwoApproximation twoApprox = new TwoApproximation(vertices, edges, A);
+        SpanningTree graph = new SpanningTree(vertices, edges);
+        TwoApproximation twoApprox = new TwoApproximation(graph, A);
         TspTour tspTour = twoApprox.solveTSP();
 
         LinkedList<GraphVertex> realTraverseV = new LinkedList<>();
@@ -118,7 +120,8 @@ public class TwoApproximationTest {
             ArrayList<GraphVertex> vertices = new ArrayList<>(List.of(A, B, C));
             ArrayList<GraphEdge> edges = new ArrayList<>(List.of(AB, AC, BC));
 
-            TwoApproximation twoApprox = new TwoApproximation(vertices, edges, A);
+            SpanningTree graph = new SpanningTree(vertices, edges);
+            TwoApproximation twoApprox = new TwoApproximation(graph, A);
             TspTour tsp = twoApprox.solveTSP();
 
             LinkedList<GraphEdge> trueET = new LinkedList<>();
@@ -172,7 +175,8 @@ public class TwoApproximationTest {
                     EB, EC, ED, EA
             ));
 
-            TwoApproximation twoApprox = new TwoApproximation(vertices, edges, A);
+            SpanningTree graph = new SpanningTree(vertices, edges);
+            TwoApproximation twoApprox = new TwoApproximation(graph, A);
             TspTour tspTour = twoApprox.solveTSP();
 
             LinkedList<GraphEdge> eTraversal = new LinkedList<>();

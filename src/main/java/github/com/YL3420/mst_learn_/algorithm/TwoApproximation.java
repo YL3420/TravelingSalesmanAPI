@@ -25,11 +25,11 @@ public class TwoApproximation {
      */
 
 
-    public TwoApproximation(List<GraphVertex> vertices, List<GraphEdge> edges, GraphVertex root){
+    public TwoApproximation(SpanningTree graph, GraphVertex root){
         // check for precondition
 
         this.root = root;
-        graph = new MinimumSpanningTree(new SpanningTree(vertices, edges));
+        this.graph = new MinimumSpanningTree(graph);
         tspCost = 0;
 //        tspTour = solveTSP();
     }
