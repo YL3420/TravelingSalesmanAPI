@@ -1,5 +1,8 @@
 package github.com.YL3420.mst_learn_.graph;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import github.com.YL3420.mst_learn_.data_structure.DeduplicatedLinkedList;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,15 +16,21 @@ public class SpanningTree extends UndirectedGraph {
     /*
         edges included in MST
      */
+    @JsonIgnore
     public List<GraphEdge> visitedEdges;
+    @JsonIgnore
     public HashMap<GraphVertex, DeduplicatedLinkedList<GraphEdge>> mapToMstAdjList;
 
     /*
         minimum cost for MST traversal
      */
+
+    @JsonIgnore
     public double mstWeight;
 
-    public SpanningTree(LinkedList<GraphVertex> vertices, LinkedList<GraphEdge> edges){
+    @JsonCreator
+    public SpanningTree(@JsonProperty("vertices") LinkedList<GraphVertex> vertices,
+            @JsonProperty("edges") LinkedList<GraphEdge> edges){
         super(vertices, edges);
         visitedEdges = new ArrayList<>();
         mapToMstAdjList = new HashMap<>();
@@ -32,6 +41,7 @@ public class SpanningTree extends UndirectedGraph {
         uses a variation of BFS traversal to ensure that all nodes is reachable by any combination of edge traversal
         by any other node
      */
+    @JsonIgnore
     public boolean isSpanningTree(){
         assert !vertices.isEmpty();
 

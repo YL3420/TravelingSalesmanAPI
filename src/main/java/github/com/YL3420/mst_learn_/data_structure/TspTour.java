@@ -39,10 +39,7 @@ public class TspTour {
     public LinkedList<String> getVertexTraversal(){
         LinkedList<String> vTString = new LinkedList<>();
         for(GraphVertex v : getVTraverseOrder()){
-            if(v.label != null)
-                vTString.add(v.label);
-            else if(v.loc() != null)
-                vTString.add("{"+v.loc().x() + ", " + v.loc().y() + "}");
+            vTString.add(getVertexInfo(v));
         }
 
         return vTString;
@@ -53,6 +50,31 @@ public class TspTour {
     public LinkedList<GraphEdge> getETraverseOrder(){
         return eTraverseOrder;
     }
+
+    @JsonGetter("edge_traversal")
+    public LinkedList<HashMap<String, String>> getEdgeTraversal(){
+        LinkedList<HashMap<String, String>> eTString = new LinkedList<>();
+        for(GraphEdge e : getETraverseOrder()){
+            HashMap<String, String> edgeInfo = new HashMap<>();
+            edgeInfo.put("v1", getVertexInfo(e.v1()));
+            edgeInfo.put("v2", getVertexInfo(e.v2()));
+            edgeInfo.put("weight", Double.toString(e.weight()));
+            eTString.add(edgeInfo);
+        }
+        return eTString;
+    }
+
+    @JsonIgnore
+    private String getVertexInfo(GraphVertex v){
+        if(v.label != null)
+            return v.label;
+        else if(v.loc() != null)
+            return "{"+v.loc().x() + ", " + v.loc().y() + "}";
+        else
+            return "";
+
+    }
+
 
     @JsonIgnore
     private LinkedList<GraphEdge> makeETraverseOrder(){

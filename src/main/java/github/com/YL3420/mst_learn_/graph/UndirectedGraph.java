@@ -1,5 +1,9 @@
 package github.com.YL3420.mst_learn_.graph;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -34,7 +38,8 @@ public class UndirectedGraph {
             outGoingEdges = new LinkedList<>();
         }
 
-        public GraphVertex(String label){
+        @JsonCreator
+        public GraphVertex(@JsonProperty("label") String label){
             this.label = label;
             this.loc = null;
             outGoingEdges = new LinkedList<>();
@@ -43,6 +48,7 @@ public class UndirectedGraph {
         /*
             getter for loc: IPair
          */
+        @JsonGetter("coordinate")
         public IPair loc() { return loc; }
 
 
@@ -53,12 +59,14 @@ public class UndirectedGraph {
             note that the assert might make it slow, but prolly not that slow
             depends on the size of the problem, its prolly O(1)
          */
+        @JsonIgnore
         public void addOutGoingEdge(GraphEdge newEdge){
             assert newEdge.v1.equals(this) || newEdge.v2.equals(this);
             if(!outGoingEdges.contains(newEdge))
                 outGoingEdges.add(newEdge);
         }
 
+        @JsonIgnore
         @Override
         public Iterable<GraphEdge> outGoingEdges(){
             return outGoingEdges;
@@ -88,6 +96,7 @@ public class UndirectedGraph {
         /*
             for an edge, the two vertices on either ends can't be the same
          */
+        @JsonCreator
         public GraphEdge {
             if(v1.equals(v2)) {
                 throw new IllegalArgumentException("v1 and v2 must be on different coordinates");
@@ -97,6 +106,7 @@ public class UndirectedGraph {
         /*
             get the other end on the edge given one end of the edge
          */
+        @JsonGetter("other_v")
         @Override
         public GraphVertex getOther(GraphVertex v){
             if(v.equals(v1())) return v2();
@@ -123,8 +133,10 @@ public class UndirectedGraph {
 
     public LinkedList<GraphVertex> vertices;
     public LinkedList<GraphEdge> edges;
-    public HashMap<GraphVertex, HashMap<GraphVertex, GraphEdge>> graphAdjMatrix;
 
+    @JsonIgnore
+    public HashMap<GraphVertex, HashMap<GraphVertex, GraphEdge>> graphAdjMatrix;
+    @JsonIgnore
     public double totalWeight;
 
     /*
