@@ -23,32 +23,6 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-//        GraphVertex A = new GraphVertex("A");
-//        GraphVertex B = new GraphVertex("B");
-//        GraphVertex C = new GraphVertex("C");
-//
-//        GraphEdge AB = new GraphEdge(A, B, 1);
-//        GraphEdge AC = new GraphEdge(A, C, 1);
-//        GraphEdge BC = new GraphEdge(C, B, 1);
-//
-//        LinkedList<GraphVertex> vertices = new LinkedList<>(List.of(A, B, C));
-//        LinkedList<GraphEdge> edges = TwoApproximation.makeRandCompleteGraph(vertices);
-//        SpanningTree graph = new SpanningTree(vertices, edges);
-//
-//        TwoApproximation tspSolver = new TwoApproximation(graph, A);
-//        TspTour solution =  tspSolver.solveTSP();
-//
-//
-//        Iterator<GraphEdge> eIter = solution.getETraverseOrder().iterator();
-//        for(GraphVertex v : solution.getVTraverseOrder()){
-//            System.out.print(v.label);
-//            if(eIter.hasNext()) {
-//                System.out.print(" -");
-//                System.out.print(eIter.next().weight());
-//                System.out.print("-> ");
-//            }
-//        }
-
         SpringApplication.run(Main.class, args);
     }
 }

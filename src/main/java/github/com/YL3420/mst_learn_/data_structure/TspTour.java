@@ -1,6 +1,8 @@
 package github.com.YL3420.mst_learn_.data_structure;
 
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import github.com.YL3420.mst_learn_.graph.SpanningTree;
 import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphEdge;
 import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphVertex;
@@ -23,18 +25,36 @@ public class TspTour {
         this.eTraverseOrder = makeETraverseOrder();
     }
 
+    @JsonGetter("tour_cost")
     public double getTourCost(){
         return this.tourCost;
     }
 
+    @JsonIgnore
     public LinkedList<GraphVertex> getVTraverseOrder(){
         return vTraverseOrder;
     }
 
+    @JsonGetter("vertex_traversal")
+    public LinkedList<String> getVertexTraversal(){
+        LinkedList<String> vTString = new LinkedList<>();
+        for(GraphVertex v : getVTraverseOrder()){
+            if(v.label != null)
+                vTString.add(v.label);
+            else if(v.loc() != null)
+                vTString.add("{"+v.loc().x() + ", " + v.loc().y() + "}");
+        }
+
+        return vTString;
+    }
+
+
+    @JsonIgnore
     public LinkedList<GraphEdge> getETraverseOrder(){
         return eTraverseOrder;
     }
 
+    @JsonIgnore
     private LinkedList<GraphEdge> makeETraverseOrder(){
         Iterator<GraphVertex> vIter = this.vTraverseOrder.iterator();
         LinkedList<GraphEdge> eList = new LinkedList<>();
@@ -49,10 +69,12 @@ public class TspTour {
         return eList;
     }
 
+    @JsonIgnore
     public HashMap<GraphVertex, DeduplicatedLinkedList<GraphEdge>> getVToMstAdjList(){
         return new HashMap<>(graph.mapToMstAdjList);
     }
 
+    @JsonIgnore
     public HashMap<GraphVertex, HashMap<GraphVertex, GraphEdge>> getAdjMatrix(){
         return new HashMap<>(graph.graphAdjMatrix);
     }
