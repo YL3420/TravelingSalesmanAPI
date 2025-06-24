@@ -6,6 +6,7 @@ import github.com.YL3420.mst_learn_.data_structure.TspTour;
 import github.com.YL3420.mst_learn_.graph.SpanningTree;
 import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphEdge;
 import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphVertex;
+import github.com.YL3420.mst_learn_.service.TspSolverService;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class GraphController {
 
     @Autowired
+    private TspSolverService tspSolverService;
+
+    @Autowired
     public GraphController(){
 
     }
@@ -33,7 +37,8 @@ public class GraphController {
     @PostMapping("/post")
     public ResponseEntity<Map<String, String>> submitTspProblem(@RequestBody SpanningTree graph){
 
-        return ResponseEntity.accepted().body(Map.of("jobId", "3"));
+        String id = tspSolverService.submitTspProblem(graph);
+        return ResponseEntity.accepted().body(Map.of("jobId", id));
     }
 
 
