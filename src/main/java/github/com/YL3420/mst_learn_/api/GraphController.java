@@ -1,6 +1,7 @@
 package github.com.YL3420.mst_learn_.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import github.com.YL3420.mst_learn_.Exception.TspInvalidInputException;
 import github.com.YL3420.mst_learn_.algorithm.TwoApproximation;
 import github.com.YL3420.mst_learn_.algorithm.TspSolverFactory;
 import github.com.YL3420.mst_learn_.data_structure.TspTour;
@@ -13,9 +14,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,30 +42,34 @@ public class GraphController {
 
     @PostMapping("/solve")
     public ResponseEntity<Map<String, String>> submitTspProblem(@RequestBody TspProblemBody problem){
+        ResponseEntity<Map<String, String>> returnBody;
 
-        String id = tspSolverService.submitTspProblem(problem.getGraph(), problem.getRoot(), tspSolverMaker);
-        return ResponseEntity.accepted().body(Map.of("jobId", id));
+        try {
+            String id = tspSolverService.submitTspProblem(problem.getGraph(), problem.getRoot(),
+                    tspSolverMaker);
+            returnBody = ResponseEntity.accepted().body(Map.of("jobId", id));
+        } catch(TspInvalidInputException e){
+
+            returnBody = ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+        }
+        return returnBody;
     }
 
 
-    @GetMapping(value = "/example_solution", produces = MediaType.APPLICATION_JSON_VALUE)
-    public TspTour getHi(){
+    @GetMapping(value = "/solution/{taskId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getTspSolution(@PathVariable String taskId){
+        String taskStatus = tspSolverService.getTaskStatus(taskId);
 
-        ObjectMapper mapper = new ObjectMapper();
-        GraphVertex A = new GraphVertex("A");
-        GraphVertex B = new GraphVertex("B");
-        GraphVertex C = new GraphVertex("C");
+        if(taskStatus == null) return ResponseEntity.notFound().build();
 
-        GraphEdge AB = new GraphEdge(A, B, 1);
-        GraphEdge AC = new GraphEdge(A, C, 1);
-        GraphEdge BC = new GraphEdge(C, B, 1);
+        if(taskStatus.equals("processing")){
+            return ResponseEntity.status(HttpStatus.PROCESSING).body(Map.of("status", "processing"));
+        } else if (taskStatus.equals("completed")){
+            TspTour result = tspSolverService.getSolution(taskId);
+            System.out.println(result.getVTraverseOrder().size());
+            return ResponseEntity.ok(result);
+        }
 
-        LinkedList<GraphVertex> vertices = new LinkedList<>(List.of(A, B, C));
-        LinkedList<GraphEdge> edges = TwoApproximation.makeRandCompleteGraph(vertices);
-        SpanningTree graph = new SpanningTree(vertices, edges);
-
-        TwoApproximation tspSolver = new TwoApproximation(graph, A);
-
-        return tspSolver.solveTSP();
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", taskStatus));
     }
 }

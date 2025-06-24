@@ -35,7 +35,6 @@ public class SpanningTree extends UndirectedGraph {
         visitedEdges = new ArrayList<>();
         mapToMstAdjList = new HashMap<>();
         mstWeight = totalWeight;
-        this.root = root;
     }
 
     /*
@@ -55,7 +54,8 @@ public class SpanningTree extends UndirectedGraph {
 
         while(!frontier.isEmpty()){
             GraphVertex g = frontier.remove();
-            for(GraphVertex v : this.neighbors(g)){
+            for(GraphEdge e : graphAdjList.get(g)){
+                GraphVertex v = e.getOther(g);
                 if(!visited.contains(v)){
                     frontier.add(v);
                     visited.add(v);

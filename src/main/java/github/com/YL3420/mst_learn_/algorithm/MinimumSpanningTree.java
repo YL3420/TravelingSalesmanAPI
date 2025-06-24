@@ -46,7 +46,7 @@ public class MinimumSpanningTree {
             mark starting node as visited and add all of its outgoing edges to the min heap
          */
         visited.add(root);
-        for(GraphEdge e : root.outGoingEdges())
+        for(GraphEdge e : solution.graphAdjList.get(root))
             candidateEdges.addOrUpdate(e, e.weight());
 
         while(visited.size() != solution.vertices.size()){
@@ -103,7 +103,7 @@ public class MinimumSpanningTree {
                 add all outgoing edges of the newly visited node to the min heap
                 for future considerations
              */
-            for(GraphEdge e : added.outGoingEdges())
+            for(GraphEdge e : solution.graphAdjList.get(added))
                 candidateEdges.addOrUpdate(e, e.weight());
 
         }

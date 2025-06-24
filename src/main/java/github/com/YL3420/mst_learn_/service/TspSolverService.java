@@ -5,12 +5,14 @@ import github.com.YL3420.mst_learn_.algorithm.TwoApproximation;
 import github.com.YL3420.mst_learn_.api.GraphController;
 import github.com.YL3420.mst_learn_.data_structure.TspTour;
 import github.com.YL3420.mst_learn_.graph.SpanningTree;
+import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphEdge;
 import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphVertex;
 import github.com.YL3420.mst_learn_.model.TspProblemBody;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 
 @Service
@@ -23,6 +25,8 @@ public class TspSolverService {
     public void solveTspProblem(String jobId, SpanningTree graph, GraphVertex root, TspSolverFactory solverFactory){
         String status = taskStatus.get(jobId);
         TwoApproximation solver = solverFactory.createTwoApproxSolver(graph, root);
+
+
         try{
             TspTour solution = solver.solveTSP();
 
@@ -45,8 +49,20 @@ public class TspSolverService {
         return taskId;
     }
 
+
     public String getTaskStatus(String jobId){
         return taskStatus.get(jobId);
+    }
+
+    public TspTour getSolution(String taskId){
+        if(taskId != null){
+            TspTour result = solutions.get(taskId);
+            deleteTaskAndSolution(taskId);
+
+            return result;
+        }
+
+        return null;
     }
 
 
@@ -54,7 +70,7 @@ public class TspSolverService {
         String status = taskStatus.get(jobId);
 
         if(status!=null)
-            if(status == "completed" || status == "failed"){
+            if(status.equals("completed") || status.equals("failed")){
                 solutions.remove(jobId);
                 taskStatus.remove(jobId);
             }

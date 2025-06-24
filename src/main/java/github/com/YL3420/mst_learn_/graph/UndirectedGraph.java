@@ -99,6 +99,11 @@ public class UndirectedGraph {
 
             return this.label.equals(otherVertex.label);
         }
+
+        @Override
+        public int hashCode(){
+            return label.hashCode();
+        }
     }
 
 
@@ -151,23 +156,32 @@ public class UndirectedGraph {
     @JsonIgnore
     public HashMap<GraphVertex, HashMap<GraphVertex, GraphEdge>> graphAdjMatrix;
     @JsonIgnore
-    public double totalWeight;
+    public HashMap<GraphVertex, LinkedList<GraphEdge>> graphAdjList;
     @JsonIgnore
-    public GraphVertex root;
+    public double totalWeight;
 
     /*
         creates new graph with initial vertices and edges maybe
      */
-    public UndirectedGraph(LinkedList<GraphVertex> vertices, LinkedList<GraphEdge> edges){
+    @JsonCreator
+    public UndirectedGraph(@JsonProperty("vertices") LinkedList<GraphVertex> vertices,
+            @JsonProperty("edges") LinkedList<GraphEdge> edges){
         this.vertices = vertices;
         this.edges = edges;
         this.totalWeight = 0;
         graphAdjMatrix = new HashMap<>();
+        graphAdjList = new HashMap<>();
 
         for(GraphEdge e : edges){
             e.v1().addOutGoingEdge(e);
             e.v2().addOutGoingEdge(e);
             totalWeight += e.weight();
+
+            graphAdjList.computeIfAbsent(e.v1(), k -> new LinkedList<>())
+                    .add(e);
+
+            graphAdjList.computeIfAbsent(e.v2(), k -> new LinkedList<>())
+                    .add(e);
 
             graphAdjMatrix.computeIfAbsent(e.v1(), k -> new HashMap<>())
                     .put(e.v2(), e);
