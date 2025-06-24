@@ -138,6 +138,8 @@ public class UndirectedGraph {
     public HashMap<GraphVertex, HashMap<GraphVertex, GraphEdge>> graphAdjMatrix;
     @JsonIgnore
     public double totalWeight;
+    @JsonIgnore
+    public GraphVertex root;
 
     /*
         creates new graph with initial vertices and edges maybe

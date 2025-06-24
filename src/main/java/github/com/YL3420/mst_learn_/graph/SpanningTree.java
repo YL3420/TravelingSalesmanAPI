@@ -35,6 +35,7 @@ public class SpanningTree extends UndirectedGraph {
         visitedEdges = new ArrayList<>();
         mapToMstAdjList = new HashMap<>();
         mstWeight = totalWeight;
+        this.root = root;
     }
 
     /*

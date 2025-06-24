@@ -2,10 +2,12 @@ package github.com.YL3420.mst_learn_.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import github.com.YL3420.mst_learn_.algorithm.TwoApproximation;
+import github.com.YL3420.mst_learn_.algorithm.TspSolverFactory;
 import github.com.YL3420.mst_learn_.data_structure.TspTour;
 import github.com.YL3420.mst_learn_.graph.SpanningTree;
 import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphEdge;
 import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphVertex;
+import github.com.YL3420.mst_learn_.model.TspProblemBody;
 import github.com.YL3420.mst_learn_.service.TspSolverService;
 import java.util.LinkedList;
 import java.util.List;
@@ -25,24 +27,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GraphController {
 
-    @Autowired
     private TspSolverService tspSolverService;
+    private TspSolverFactory tspSolverMaker;
 
     @Autowired
-    public GraphController(){
-
+    public GraphController(TspSolverService tspSolverService, TspSolverFactory tspSolverMaker){
+        this.tspSolverService = tspSolverService;
+        this.tspSolverMaker = tspSolverMaker;
     }
 
 
-    @PostMapping("/post")
-    public ResponseEntity<Map<String, String>> submitTspProblem(@RequestBody SpanningTree graph){
+    @PostMapping("/solve")
+    public ResponseEntity<Map<String, String>> submitTspProblem(@RequestBody TspProblemBody problem){
 
-        String id = tspSolverService.submitTspProblem(graph);
+        String id = tspSolverService.submitTspProblem(problem.getGraph(), problem.getRoot(), tspSolverMaker);
         return ResponseEntity.accepted().body(Map.of("jobId", id));
     }
 
 
-    @GetMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/example_solution", produces = MediaType.APPLICATION_JSON_VALUE)
     public TspTour getHi(){
 
         ObjectMapper mapper = new ObjectMapper();
