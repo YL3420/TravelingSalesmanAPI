@@ -18,10 +18,10 @@ public class MinimumSpanningTreeTest {
     @Test
     void testMakeGraph(){
 
-        GraphVertex v1 = new GraphVertex(1, 1);
-        GraphVertex v2 = new GraphVertex(2, 2);
-        GraphVertex v3 = new GraphVertex(3, 3);
-        GraphVertex v4 = new GraphVertex(4, 4);
+        GraphVertex v1 = new GraphVertex("A", "", 1, 1);
+        GraphVertex v2 = new GraphVertex("B", "", 2, 2);
+        GraphVertex v3 = new GraphVertex("C", "", 3, 3);
+        GraphVertex v4 = new GraphVertex("D", "", 4, 4);
 
         GraphEdge e1 = new GraphEdge(v1, v2, 1);
         GraphEdge e2 = new GraphEdge(v2, v3, 2);
@@ -38,8 +38,8 @@ public class MinimumSpanningTreeTest {
     @Test
     void solveTwoVertices(){
 
-        GraphVertex v1 = new GraphVertex(1, 1);
-        GraphVertex v2 = new GraphVertex(2, 2);
+        GraphVertex v1 = new GraphVertex("A", "", 1, 1);
+        GraphVertex v2 = new GraphVertex("B", "", 2, 2);
         GraphEdge e1 = new GraphEdge(v1, v2, 2);
 
         LinkedList<GraphEdge> edges = new LinkedList<GraphEdge>(List.of(e1));
@@ -62,9 +62,9 @@ public class MinimumSpanningTreeTest {
     @Test
     void solveThreeVertices(){
 
-        GraphVertex v1 = new GraphVertex(1, 1);
-        GraphVertex v2 = new GraphVertex(2, 2);
-        GraphVertex v3 = new GraphVertex(3, 3);
+        GraphVertex v1 = new GraphVertex("A", "", 1, 1);
+        GraphVertex v2 = new GraphVertex("B", "", 2, 2);
+        GraphVertex v3 = new GraphVertex("C", "", 3, 3);
         GraphEdge e1 = new GraphEdge(v1, v2, 1);
         GraphEdge e2 = new GraphEdge(v1, v3, 1);
         GraphEdge e3 = new GraphEdge(v2, v3, 3);
@@ -83,9 +83,9 @@ public class MinimumSpanningTreeTest {
 
     @Test
     void testAdjacencyList(){
-        GraphVertex v1 = new GraphVertex(1, 1);
-        GraphVertex v2 = new GraphVertex(2, 2);
-        GraphVertex v3 = new GraphVertex(3, 3);
+        GraphVertex v1 = new GraphVertex("A", "", 1, 1);
+        GraphVertex v2 = new GraphVertex("B", "", 2, 2);
+        GraphVertex v3 = new GraphVertex("C", "", 3, 3);
         GraphEdge e1 = new GraphEdge(v1, v2, 1);
         GraphEdge e2 = new GraphEdge(v1, v3, 1);
         GraphEdge e3 = new GraphEdge(v2, v3, 3);

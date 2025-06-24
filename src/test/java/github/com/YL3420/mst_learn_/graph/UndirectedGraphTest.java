@@ -20,15 +20,15 @@ abstract class UndirectedGraphTest {
         @DisplayName("testing creating a new vertex")
         @Test
         void makeGraphVertex(){
-            GraphVertex newVertex = new UndirectedGraph.GraphVertex(2, 3);
-            assertEquals(new IPair(2, 3), newVertex.loc());
+            GraphVertex newVertex = new UndirectedGraph.GraphVertex("A", "", 1, 2);
+            assertEquals(new IPair(1, 2), newVertex.loc());
         }
 
         @DisplayName("testing and making sure edge works")
         @Test
         void makeGraphEdge(){
-            GraphEdge newEdge = new UndirectedGraph.GraphEdge(new GraphVertex(1, 2),
-                    new GraphVertex(3, 4), 20.0);
+            GraphEdge newEdge = new UndirectedGraph.GraphEdge(new GraphVertex("A", "", 1, 2),
+                    new GraphVertex("B", "", 3, 4), 20.0);
 
             assertEquals(new IPair(1, 2), newEdge.v1().loc());
             assertEquals(new IPair(3, 4), newEdge.v2().loc());
@@ -38,15 +38,15 @@ abstract class UndirectedGraphTest {
         @DisplayName("if v1 and v2 of an edge has the same loc/coord, it shouldn't work")
         @Test
         void makeGraphEdgeWithSameVertices(){
-            assertThrows(IllegalArgumentException.class, () -> new UndirectedGraph.GraphEdge(new GraphVertex(1, 2),
-                    new GraphVertex(1, 2), 20.0));
+            assertThrows(IllegalArgumentException.class, () -> new UndirectedGraph.GraphEdge(new GraphVertex("A", "", 1, 2),
+                    new GraphVertex("A", "", 1, 2), 20.0));
         }
 
         @DisplayName("testing if getting the other end of the edge given one end works")
         @Test
         void testOtherEndForEdge(){
-            GraphEdge newEdge = new UndirectedGraph.GraphEdge(new GraphVertex(100, 110),
-                    new GraphVertex(3, 4), 100.9);
+            GraphEdge newEdge = new UndirectedGraph.GraphEdge(new GraphVertex("A", "", 100, 110),
+                    new GraphVertex("B", "", 3, 4), 100.9);
 
             assertEquals(new IPair(3, 4), newEdge.getOther(newEdge.v1()).loc());
             assertEquals(new IPair(100, 110), newEdge.getOther(newEdge.v2()).loc());
@@ -57,13 +57,13 @@ abstract class UndirectedGraphTest {
         @Test
         void testGetAddOutGoingEdges(){
             LinkedList<GraphEdge> allEdges = new LinkedList<>();
-            GraphVertex vertex1 = new GraphVertex(21.3, 19.2);
+            GraphVertex vertex1 = new GraphVertex("A", "", 21.3, 19.2);
             GraphEdge edge1 = new UndirectedGraph.GraphEdge(vertex1,
-                    new GraphVertex(3, 1), 2);
+                    new GraphVertex("C", "", 3, 1), 2);
             GraphEdge edge2 = new UndirectedGraph.GraphEdge(vertex1,
-                    new GraphVertex(1, 3), 20.9);
+                    new GraphVertex("D", "", 1, 3), 20.9);
             GraphEdge edge3 = new UndirectedGraph.GraphEdge(vertex1,
-                    new GraphVertex(19, 32.9), 10.9);
+                    new GraphVertex("E", "", 19, 32.9), 10.9);
 
 
             vertex1.addOutGoingEdge(edge1);
@@ -104,10 +104,10 @@ abstract class UndirectedGraphTest {
             + "all vertices directed connected to given vertex by its outgoing edges")
     @Test
     void testNeighbors(){
-        GraphVertex vertexOg = new GraphVertex(21.3, 19.2);
-        GraphVertex vertex1 = new GraphVertex(3, 1);
-        GraphVertex vertex2 = new GraphVertex(1, 3);
-        GraphVertex vertex3 = new GraphVertex(19, 32.9);
+        GraphVertex vertexOg = new GraphVertex("A", "", 21.3, 19.2);
+        GraphVertex vertex1 = new GraphVertex("B", "", 3, 1);
+        GraphVertex vertex2 = new GraphVertex("C", "", 1, 3);
+        GraphVertex vertex3 = new GraphVertex("D", "", 19, 32.9);
         GraphEdge edge1 = new UndirectedGraph.GraphEdge(vertexOg,
                 vertex1, 2);
         GraphEdge edge2 = new UndirectedGraph.GraphEdge(vertexOg,
@@ -176,8 +176,8 @@ class SpanningTreeTest extends UndirectedGraphTest {
             + "a graph with two connected vertices")
     @Test
     void isSpanningTreeTrue() {
-        GraphVertex v1 = new GraphVertex(1, 2);
-        GraphVertex v2 = new GraphVertex(3, 2);
+        GraphVertex v1 = new GraphVertex("A", "", 1, 2);
+        GraphVertex v2 = new GraphVertex("B", "", 3, 2);
         LinkedList<GraphVertex> vertices = new LinkedList<>(List.of(v1, v2));
         LinkedList<GraphEdge> edges = new LinkedList<>(List.of(new GraphEdge(v1, v2, 3)));
         SpanningTree g1 = new SpanningTree(
@@ -192,12 +192,12 @@ class SpanningTreeTest extends UndirectedGraphTest {
             + "will fail isSpanningTree")
     @Test
     void isSpanningTreeFalseBig() {
-        GraphVertex v1 = new GraphVertex(1, 2);
-        GraphVertex v2 = new GraphVertex(2, 1);
-        GraphVertex v3 = new GraphVertex(6, 1);
-        GraphVertex v4 = new GraphVertex(1, 6);
-        GraphVertex v5 = new GraphVertex(9, 1);
-        GraphVertex v6 = new GraphVertex(7, 3);
+        GraphVertex v1 = new GraphVertex("A", "", 1, 2);
+        GraphVertex v2 = new GraphVertex("B", "", 2, 1);
+        GraphVertex v3 = new GraphVertex("C", "", 6, 1);
+        GraphVertex v4 = new GraphVertex("D", "", 1, 6);
+        GraphVertex v5 = new GraphVertex("E", "", 9, 1);
+        GraphVertex v6 = new GraphVertex("F", "", 7, 3);
 
         GraphEdge e1 = new GraphEdge(v1, v2, 2);
         GraphEdge e2 = new GraphEdge(v2, v3, 9);

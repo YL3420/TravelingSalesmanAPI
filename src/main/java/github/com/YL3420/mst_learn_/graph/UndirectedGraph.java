@@ -3,7 +3,10 @@ package github.com.YL3420.mst_learn_.graph;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -14,17 +17,23 @@ public class UndirectedGraph {
     /*
         coordinate system for each nodes
      */
-    public record IPair(double x, double y){
+    public record IPair(@JsonProperty("coord_x") double x, @JsonProperty("coord_y") double y){
 
     }
 
+
+    @JsonInclude(Include.NON_NULL)
     public static class GraphVertex implements Vertex<GraphEdge> {
         /*
             IPair representation of the vertex
          */
+        @JsonUnwrapped
         private final IPair loc;
 
         public final String label;
+
+        private final String descriptor;
+
         /*
             a map with all the out going edges from the edge
             matches coordinate (IPair) to the vertex object
@@ -32,25 +41,34 @@ public class UndirectedGraph {
         public LinkedList<GraphEdge> outGoingEdges;
 
 
-        public GraphVertex(double x, double y){
-            label = null;
-            loc = new IPair(x, y);
-            outGoingEdges = new LinkedList<>();
+        public GraphVertex(String label){
+            this(label, "", Double.NaN, Double.NaN);
+        }
+
+        public GraphVertex(String label, String descriptor) {
+            this(label, descriptor, Double.NaN, Double.NaN);
         }
 
         @JsonCreator
-        public GraphVertex(@JsonProperty("label") String label){
+        public GraphVertex(
+                @JsonProperty("label") String label,
+                @JsonProperty("descriptor") String descriptor,
+                @JsonProperty("coord_x") double x,
+                @JsonProperty("coord_y") double y){
             this.label = label;
-            this.loc = null;
+            this.loc = new IPair(x, y);
+            this.descriptor = descriptor;
             outGoingEdges = new LinkedList<>();
         }
 
         /*
             getter for loc: IPair
          */
-        @JsonGetter("coordinate")
         public IPair loc() { return loc; }
 
+
+        @JsonGetter("descriptor")
+        public String getDescriptor() { return descriptor; }
 
 
         /*
@@ -79,11 +97,7 @@ public class UndirectedGraph {
 
             GraphVertex otherVertex = (GraphVertex) obj;
 
-            if(this.label != null)
-                return (this.label.equals(otherVertex.label));
-            if(this.loc != null)
-                return (this.loc.equals(otherVertex.loc));
-            return false;
+            return this.label.equals(otherVertex.label);
         }
     }
 
