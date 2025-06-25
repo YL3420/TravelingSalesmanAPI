@@ -68,7 +68,7 @@ public class TwoApproximation {
                 if(!visited.contains(n)){
                     visited.add(n);
                     frontier.add(n);
-                    tspCost += graph.solution.graphAdjMatrix.get(v).get(n).weight();
+                    tspCost += e.weight();
                 }
             }
         }

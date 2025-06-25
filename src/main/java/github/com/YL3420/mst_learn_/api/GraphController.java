@@ -1,17 +1,10 @@
 package github.com.YL3420.mst_learn_.api;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import github.com.YL3420.mst_learn_.Exception.TspInvalidInputException;
-import github.com.YL3420.mst_learn_.algorithm.TwoApproximation;
-import github.com.YL3420.mst_learn_.algorithm.TspSolverFactory;
+import github.com.YL3420.mst_learn_.algorithm.TwoApproxSolverFactory;
 import github.com.YL3420.mst_learn_.data_structure.TspTour;
-import github.com.YL3420.mst_learn_.graph.SpanningTree;
-import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphEdge;
-import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphVertex;
 import github.com.YL3420.mst_learn_.model.TspProblemBody;
 import github.com.YL3420.mst_learn_.service.TspSolverService;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,10 +24,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class GraphController {
 
     private TspSolverService tspSolverService;
-    private TspSolverFactory tspSolverMaker;
+    private TwoApproxSolverFactory tspSolverMaker;
 
     @Autowired
-    public GraphController(TspSolverService tspSolverService, TspSolverFactory tspSolverMaker){
+    public GraphController(TspSolverService tspSolverService, TwoApproxSolverFactory tspSolverMaker){
         this.tspSolverService = tspSolverService;
         this.tspSolverMaker = tspSolverMaker;
     }
