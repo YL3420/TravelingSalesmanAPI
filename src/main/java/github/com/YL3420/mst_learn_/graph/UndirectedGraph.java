@@ -7,6 +7,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -30,6 +35,8 @@ public class UndirectedGraph {
         @JsonUnwrapped
         private final IPair loc;
 
+        @NotNull
+        @NotBlank
         public final String label;
 
         private final String descriptor;
@@ -149,9 +156,14 @@ public class UndirectedGraph {
         }
     }
 
+    @NotNull
+    @NotEmpty
+    @Valid
+    public LinkedList<@Valid GraphVertex> vertices;
 
-    public LinkedList<GraphVertex> vertices;
-    public LinkedList<GraphEdge> edges;
+    @NotNull
+    @Valid
+    public LinkedList<@Valid GraphEdge> edges;
 
     @JsonIgnore
     public HashMap<GraphVertex, HashMap<GraphVertex, GraphEdge>> graphAdjMatrix;

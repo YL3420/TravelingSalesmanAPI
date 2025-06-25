@@ -5,6 +5,7 @@ import github.com.YL3420.mst_learn_.algorithm.TwoApproxSolverFactory;
 import github.com.YL3420.mst_learn_.data_structure.TspTour;
 import github.com.YL3420.mst_learn_.model.TspProblemBody;
 import github.com.YL3420.mst_learn_.service.TspSolverService;
+import jakarta.validation.Valid;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,7 +35,7 @@ public class GraphController {
 
 
     @PostMapping("/solve")
-    public ResponseEntity<Map<String, String>> submitTspProblem(@RequestBody TspProblemBody problem){
+    public ResponseEntity<Map<String, String>> submitTspProblem(@RequestBody @Valid TspProblemBody problem){
         ResponseEntity<Map<String, String>> returnBody;
 
         try {

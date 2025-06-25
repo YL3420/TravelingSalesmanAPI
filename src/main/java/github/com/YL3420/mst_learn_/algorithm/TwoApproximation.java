@@ -99,7 +99,7 @@ public class TwoApproximation {
         for(GraphVertex v : vertices) {
             for (GraphVertex v2 : vertices){
                 try {
-                    edges.add(new GraphEdge(v, v2, v.hashCode() + v2.hashCode()));
+                    edges.add(new GraphEdge(v, v2, (double)v.hashCode() + (double)v2.hashCode()));
                 } catch (IllegalArgumentException e) {
                     continue;
                 }
