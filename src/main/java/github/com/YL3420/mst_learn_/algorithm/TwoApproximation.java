@@ -77,8 +77,8 @@ public class TwoApproximation {
         GraphVertex lastVisited = root;
         for(GraphVertex v : visited){
             if(!v.equals(root) &&
-                    (graph.solution.graphAdjMatrix.get(lastVisited) == null)
-                    || graph.solution.graphAdjMatrix.get(lastVisited).get(v)==null)
+                    (graph.solution.graphAdjMatrix.get(lastVisited) == null
+                    || graph.solution.graphAdjMatrix.get(lastVisited).get(v)==null))
                 throw new NonCompleteGraph("not complete graph");
 
 
