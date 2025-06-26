@@ -18,6 +18,7 @@ public class SpanningTree extends UndirectedGraph {
      */
     @JsonIgnore
     public List<GraphEdge> visitedEdges;
+
     @JsonIgnore
     public HashMap<GraphVertex, DeduplicatedLinkedList<GraphEdge>> mapToMstAdjList;
 

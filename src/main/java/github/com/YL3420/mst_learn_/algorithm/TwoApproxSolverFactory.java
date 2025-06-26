@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 public class TwoApproxSolverFactory {
 
     public TwoApproximation createTwoApproxSolver(SpanningTree graph, GraphVertex root){
+        assert graph != null || root != null;
         return new TwoApproximation(graph, root);
     }
 }

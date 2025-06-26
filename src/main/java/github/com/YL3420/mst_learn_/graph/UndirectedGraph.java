@@ -124,6 +124,7 @@ public class UndirectedGraph {
          */
         @JsonCreator
         public GraphEdge {
+            assert v1 != null && v2 != null;
             if(v1.equals(v2)) {
                 throw new IllegalArgumentException("v1 and v2 must be on different coordinates");
             }
@@ -178,6 +179,7 @@ public class UndirectedGraph {
     @JsonCreator
     public UndirectedGraph(@JsonProperty("vertices") LinkedList<GraphVertex> vertices,
             @JsonProperty("edges") LinkedList<GraphEdge> edges){
+        assert vertices != null && edges != null;
         this.vertices = vertices;
         this.edges = edges;
         this.totalWeight = 0;

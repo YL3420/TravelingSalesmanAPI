@@ -43,7 +43,6 @@ public class GraphController {
                     tspSolverMaker);
             returnBody = ResponseEntity.accepted().body(Map.of("jobId", id));
         } catch(TspInvalidInputException e){
-
             returnBody = ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
         }
         return returnBody;
@@ -60,10 +59,9 @@ public class GraphController {
             return ResponseEntity.status(HttpStatus.PROCESSING).body(Map.of("status", "processing"));
         } else if (taskStatus.equals("completed")){
             TspTour result = tspSolverService.getSolution(taskId);
-            System.out.println(result.getVTraverseOrder().size());
             return ResponseEntity.ok(result);
         }
 
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", taskStatus));
+        return ResponseEntity.badRequest().body(Map.of("error", taskStatus));
     }
 }

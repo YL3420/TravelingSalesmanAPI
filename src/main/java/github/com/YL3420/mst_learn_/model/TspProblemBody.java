@@ -24,6 +24,8 @@ public class TspProblemBody {
 
     @JsonCreator
     public TspProblemBody(@JsonProperty("graph") SpanningTree graph, @JsonProperty("root") GraphVertex root){
+        assert graph != null || root != null;
+
         this.root = root;
         this.graph = graph;
     }

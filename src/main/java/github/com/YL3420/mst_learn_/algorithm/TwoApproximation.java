@@ -1,5 +1,6 @@
 package github.com.YL3420.mst_learn_.algorithm;
 
+import github.com.YL3420.mst_learn_.Exception.NonCompleteGraph;
 import github.com.YL3420.mst_learn_.data_structure.DeduplicatedLinkedList;
 import github.com.YL3420.mst_learn_.data_structure.TspTour;
 import github.com.YL3420.mst_learn_.graph.SpanningTree;
@@ -77,6 +78,13 @@ public class TwoApproximation {
         GraphVertex lastVisited = root;
         for(GraphVertex v : visited){
             traverseOrder.add(v);
+
+            if(!v.equals(root) &&
+                    (graph.solution.graphAdjMatrix.get(lastVisited) == null)
+                    || graph.solution.graphAdjMatrix.get(lastVisited).get(v)==null)
+                throw new NonCompleteGraph("not complete graph");
+
+
             lastVisited = v;
         }
         traverseOrder.add(root);

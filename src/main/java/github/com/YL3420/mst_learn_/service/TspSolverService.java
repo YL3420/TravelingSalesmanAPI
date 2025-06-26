@@ -1,5 +1,8 @@
 package github.com.YL3420.mst_learn_.service;
 
+import github.com.YL3420.mst_learn_.Exception.NoRootException;
+import github.com.YL3420.mst_learn_.Exception.NonCompleteGraph;
+import github.com.YL3420.mst_learn_.Exception.NonSpanningTreeException;
 import github.com.YL3420.mst_learn_.algorithm.TwoApproxSolverFactory;
 import github.com.YL3420.mst_learn_.algorithm.TwoApproximation;
 import github.com.YL3420.mst_learn_.data_structure.TspTour;
@@ -29,6 +32,10 @@ public class TspSolverService {
             if(status!=null){
                 solutions.put(jobId, solution);
                 taskStatus.put(jobId, "completed");
+            }
+        } catch (NonSpanningTreeException | NoRootException | NonCompleteGraph e){
+            if(status!=null){
+                taskStatus.put(jobId, "failed " + e.getMessage());
             }
         } catch (Exception e){
             if(status!=null){
@@ -65,11 +72,10 @@ public class TspSolverService {
     public void deleteTaskAndSolution(String jobId){
         String status = taskStatus.get(jobId);
 
-        if(status!=null)
-            if(status.equals("completed") || status.equals("failed")){
-                solutions.remove(jobId);
-                taskStatus.remove(jobId);
-            }
+        if(status!=null){
+            solutions.remove(jobId);
+            taskStatus.remove(jobId);
+        }
     }
 
 

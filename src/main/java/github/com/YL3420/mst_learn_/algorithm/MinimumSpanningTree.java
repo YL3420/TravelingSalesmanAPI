@@ -1,5 +1,7 @@
 package github.com.YL3420.mst_learn_.algorithm;
 
+import github.com.YL3420.mst_learn_.Exception.NoRootException;
+import github.com.YL3420.mst_learn_.Exception.NonSpanningTreeException;
 import github.com.YL3420.mst_learn_.data_structure.DeduplicatedLinkedList;
 import github.com.YL3420.mst_learn_.data_structure.MinHeap;
 import github.com.YL3420.mst_learn_.graph.SpanningTree;
@@ -29,8 +31,8 @@ public class MinimumSpanningTree {
      */
     public void runPrims(GraphVertex root){
         // this assert is rlly slow so might get rid of it
-        assert solution.isSpanningTree();
-        assert solution.vertices.contains(root);
+        if(!solution.isSpanningTree()) throw new NonSpanningTreeException("the graph is not a spanning tree");
+        if(!solution.vertices.contains(root)) throw new NoRootException("root is not contained in graph");
 
         solution.mstWeight = 0;
 
