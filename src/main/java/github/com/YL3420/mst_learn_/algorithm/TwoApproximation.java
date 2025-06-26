@@ -69,7 +69,6 @@ public class TwoApproximation {
                 if(!visited.contains(n)){
                     visited.add(n);
                     frontier.add(n);
-                    tspCost += e.weight();
                 }
             }
         }
@@ -77,13 +76,14 @@ public class TwoApproximation {
         traverseOrder = new LinkedList<>();
         GraphVertex lastVisited = root;
         for(GraphVertex v : visited){
-            traverseOrder.add(v);
-
             if(!v.equals(root) &&
                     (graph.solution.graphAdjMatrix.get(lastVisited) == null)
                     || graph.solution.graphAdjMatrix.get(lastVisited).get(v)==null)
                 throw new NonCompleteGraph("not complete graph");
 
+
+            traverseOrder.add(v);
+            tspCost += graph.solution.graphAdjMatrix.get(lastVisited).get(root).weight();
 
             lastVisited = v;
         }
