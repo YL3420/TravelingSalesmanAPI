@@ -22,11 +22,10 @@ public class TspSolverService {
 
     @Async
     public void solveTspProblem(String jobId, SpanningTree graph, GraphVertex root, TwoApproxSolverFactory solverFactory){
+
         String status = taskStatus.get(jobId);
-        TwoApproximation solver = solverFactory.createTwoApproxSolver(graph, root);
-
-
         try{
+            TwoApproximation solver = solverFactory.createTwoApproxSolver(graph, root);
             TspTour solution = solver.solveTSP();
 
             if(status!=null){

@@ -76,20 +76,24 @@ public class TwoApproximation {
         traverseOrder = new LinkedList<>();
         GraphVertex lastVisited = root;
         for(GraphVertex v : visited){
-            if(!v.equals(root) &&
-                    (graph.solution.graphAdjMatrix.get(lastVisited) == null
-                    || graph.solution.graphAdjMatrix.get(lastVisited).get(v)==null))
-                throw new NonCompleteGraph("not complete graph");
+            if(!v.equals(lastVisited))
+                    if(graph.solution.graphAdjMatrix.containsKey(lastVisited)
+                    && graph.solution.graphAdjMatrix.get(lastVisited).get(v) != null)
+                        tspCost += graph.solution.graphAdjMatrix.get(lastVisited).get(v).weight();
+                    else
+                        throw new NonCompleteGraph("not complete graph");
 
 
             traverseOrder.add(v);
-            tspCost += graph.solution.graphAdjMatrix.get(lastVisited).get(root).weight();
 
             lastVisited = v;
         }
         traverseOrder.add(root);
 
-        tspCost += graph.solution.graphAdjMatrix.get(lastVisited).get(root).weight();
+
+        if(graph.solution.graphAdjMatrix.containsKey(lastVisited)
+                && graph.solution.graphAdjMatrix.get(lastVisited).get(root) != null)
+            tspCost += graph.solution.graphAdjMatrix.get(lastVisited).get(root).weight();
     }
 
 

@@ -3,6 +3,8 @@ package github.com.YL3420.mst_learn_.api;
 import github.com.YL3420.mst_learn_.Exception.TspInvalidInputException;
 import github.com.YL3420.mst_learn_.algorithm.TwoApproxSolverFactory;
 import github.com.YL3420.mst_learn_.data_structure.TspTour;
+import github.com.YL3420.mst_learn_.graph.UndirectedGraph;
+import github.com.YL3420.mst_learn_.graph.UndirectedGraph.GraphVertex;
 import github.com.YL3420.mst_learn_.model.TspProblemBody;
 import github.com.YL3420.mst_learn_.service.TspSolverService;
 import jakarta.validation.Valid;

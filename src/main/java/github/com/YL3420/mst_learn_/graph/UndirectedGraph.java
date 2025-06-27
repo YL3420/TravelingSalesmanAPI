@@ -62,7 +62,7 @@ public class UndirectedGraph {
                 @JsonProperty("descriptor") String descriptor,
                 @JsonProperty("coord_x") double x,
                 @JsonProperty("coord_y") double y){
-            this.label = label;
+            this.label = label.trim();
             this.loc = new IPair(x, y);
             this.descriptor = descriptor;
             outGoingEdges = new LinkedList<>();
