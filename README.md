@@ -37,7 +37,7 @@ into the solution, then marks the other end of the edge as visited and move on t
 
 Example: 
 
-![problem image](https://github.com/YL3420/minimum-spanning-tree-java/blob/main/visual/ex1m.png?raw=true);
+<img src="https://github.com/YL3420/minimum-spanning-tree-java/blob/main/visual/ex1m.png?raw=true" alt="problem image" width="300"/>
 
 #### Approximation algorithm
 Instead of aiming to solve for the Traveling Salesman Problem with an optimal solution, which is infeasible when it comes to large inputs,
